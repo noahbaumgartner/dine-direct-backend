@@ -18,9 +18,4 @@
 const express = require("express");
 const router = express.Router();
 
-router
-  .route("/:id")
-  .get((req, res) => {})
-  .post((req, res) => {});
-
 module.exports = router;

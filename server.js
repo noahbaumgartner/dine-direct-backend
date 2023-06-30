@@ -1,18 +1,47 @@
 const express = require("express");
 const app = express();
+const sequelize = require("./config/database");
 
+const productGroupRouter = require("./routes/productGroup");
+const productRouter = require("./routes/product");
+const modifierRouter = require("./routes/modifier");
+
+const spaceRouter = require("./routes/space");
+const tableRouter = require("./routes/table");
+
+const clientRouter = require("./routes/client");
 const orderRouter = require("./routes/order");
 
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 app.use(logger);
-app.use("/order", orderRouter);
 
+app.use(express.json());
+
+app.use("/productGroups", productGroupRouter);
+app.use("/products", productRouter);
+app.use("/modifiers", modifierRouter);
+app.use("/spaces", spaceRouter);
+app.use("/tables", tableRouter);
+app.use("/clients", clientRouter);
+app.use("/orders", orderRouter);
+
+// logger
 function logger(req, res, next) {
   console.log(req.originalUrl);
   next();
 }
+
+// sequelize init
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database and tables created!");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database:", error);
+  });
 
 // swagger
 const options = {
