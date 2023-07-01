@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const ProductService = require("../services/productService");
+const ProductAssignmentService = require("../services/productAssignmentService");
 
 router
   .get("/", (request, response) => {
-    ProductService.getAll()
+    ProductAssignmentService.getAll()
       .then((records) => {
         response.json(records);
       })
@@ -15,7 +15,7 @@ router
       });
   })
   .get("/:id", (request, response) => {
-    ProductService.get(request.params.id)
+    ProductAssignmentService.get(request.params.id)
       .then((records) => {
         response.json(records);
       })
@@ -25,8 +25,8 @@ router
       });
   })
   .post("/", (request, response) => {
-    const { name, price } = request.body;
-    ProductService.create(name, price)
+    const { productGroupId, productId } = request.body;
+    ProductAssignmentService.create(productGroupId, productId)
       .then((record) => {
         response.status(201).json({
           message: "Record created successfully",
@@ -40,7 +40,7 @@ router
   })
   .put("/:id", (request, response) => {
     const { name, price } = request.body;
-    ProductService.update(request.params.id, name, price)
+    ProductAssignmentService.update(request.params.id, name, price)
       .then((record) => {
         response.status(201).json({
           message: "Record updated successfully",
@@ -53,7 +53,7 @@ router
       });
   })
   .delete("/:id", (request, response) => {
-    ProductService.delete(request.params.id)
+    ProductAssignmentService.delete(request.params.id)
       .then((record) => {
         response.status(201).json({
           message: "Record deleted successfully",

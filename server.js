@@ -4,6 +4,7 @@ const sequelize = require("./config/database");
 
 const productGroupRouter = require("./routes/productGroup");
 const productRouter = require("./routes/product");
+const productAssignmentRouter = require("./routes/productAssignment");
 const modifierRouter = require("./routes/modifier");
 
 const spaceRouter = require("./routes/space");
@@ -21,6 +22,7 @@ app.use(express.json());
 
 app.use("/productGroups", productGroupRouter);
 app.use("/products", productRouter);
+app.use("/productAssignments", productAssignmentRouter);
 app.use("/modifiers", modifierRouter);
 app.use("/spaces", spaceRouter);
 app.use("/tables", tableRouter);
