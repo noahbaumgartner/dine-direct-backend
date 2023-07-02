@@ -1,6 +1,6 @@
-# Dine Direct Backend
+# Dino Backend
 
-Dine Direct is a simple client/server based ordering system for drinks and food.
+Dino is a simple client/server based ordering system for drinks and food.
 
 ## Setup
 

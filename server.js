@@ -50,7 +50,7 @@ const options = {
   definition: {
     openapi: "3.1.0",
     info: {
-      title: "Dine Direct API",
+      title: "Dino API",
       version: "0.1.0",
       description: "",
       license: {
