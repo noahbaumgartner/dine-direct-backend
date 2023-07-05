@@ -1,6 +1,6 @@
 const express = require("express");
-const app = express();
 const sequelize = require("./config/database");
+const cors = require("cors");
 
 const productGroupRouter = require("./routes/productGroup");
 const productRouter = require("./routes/product");
@@ -13,13 +13,17 @@ const tableRouter = require("./routes/table");
 const clientRouter = require("./routes/client");
 const orderRouter = require("./routes/order");
 
-const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
-app.use(logger);
-
+// general
+const app = express();
 app.use(express.json());
 
+// cors
+app.use(cors());
+
+// routes
 app.use("/productGroups", productGroupRouter);
 app.use("/products", productRouter);
 app.use("/productAssignments", productAssignmentRouter);
@@ -30,6 +34,7 @@ app.use("/clients", clientRouter);
 app.use("/orders", orderRouter);
 
 // logger
+app.use(logger);
 function logger(req, res, next) {
   console.log(req.originalUrl);
   next();
@@ -46,32 +51,10 @@ sequelize
   });
 
 // swagger
-const options = {
-  definition: {
-    openapi: "3.1.0",
-    info: {
-      title: "Dino API",
-      version: "0.1.0",
-      description: "",
-      license: {
-        name: "MIT",
-        url: "https://spdx.org/licenses/MIT.html",
-      },
-    },
-    servers: [
-      {
-        url: "http://localhost:3000",
-      },
-    ],
-  },
-  apis: ["./routes/*.js"],
-};
-
-const specs = swaggerJsdoc(options);
 app.use(
   "/api-docs",
   swaggerUi.serve,
-  swaggerUi.setup(specs, { explorer: true })
+  swaggerUi.setup(swaggerDocument, { explorer: true })
 );
 
-app.listen(3000);
+app.listen(8000);
