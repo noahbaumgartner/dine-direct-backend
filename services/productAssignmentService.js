@@ -5,24 +5,30 @@ class ProductAssignmentService {
     return await ProductAssignment.findAll();
   }
 
-  async get(id) {
-    const productAssignment = await ProductAssignment.findByPk(id);
-    if (productAssignment == null) throw new TypeError("id does not exist");
+  async getAllForProductGroup(productGroupId) {
+    const productAssignments = await ProductAssignment.findAll({
+      where: {
+        ProductGroupId: productGroupId,
+      },
+    });
 
-    return productAssignment;
+    return productAssignments;
   }
 
   async create(productGroupId, productId) {
-    console.log(productGroupId, productId);
     return await ProductAssignment.create({
       ProductGroupId: productGroupId,
       ProductId: productId,
     });
   }
 
-  async delete(id) {
-    const ProductAssignment = await this.get(id);
-    return await ProductAssignment.destroy();
+  async delete(productGroupId, productId) {
+    return await ProductAssignment.destroy({
+      where: {
+        ProductGroupId: productGroupId,
+        ProductId: productId,
+      },
+    });
   }
 }
 

@@ -9,7 +9,7 @@ class ProductGroupService {
     const productGroup = await ProductGroup.findByPk(id);
     if (productGroup == null) throw new TypeError("id does not exist");
 
-    return await productGroup;
+    return productGroup;
   }
 
   async create(name) {
@@ -22,7 +22,7 @@ class ProductGroupService {
     const productGroup = await this.get(id);
     productGroup.name = name;
 
-    return productGroup.save();
+    return await productGroup.save();
   }
 
   async delete(id) {

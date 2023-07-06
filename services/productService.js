@@ -6,10 +6,10 @@ class ProductService {
   }
 
   async get(id) {
-    const Product = await Product.findByPk(id);
-    if (Product == null) throw new TypeError("id does not exist");
+    const product = await Product.findByPk(id);
+    if (product == null) throw new TypeError("id does not exist");
 
-    return await Product;
+    return product;
   }
 
   async create(name, price) {
@@ -24,7 +24,7 @@ class ProductService {
     Product.name = name;
     Product.price = price;
 
-    return Product.save();
+    return await Product.save();
   }
 
   async delete(id) {
