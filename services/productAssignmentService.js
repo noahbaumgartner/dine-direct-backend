@@ -1,10 +1,6 @@
 const ProductAssignment = require("../models/productAssignment");
 
 class ProductAssignmentService {
-  async getAll() {
-    return await ProductAssignment.findAll();
-  }
-
   async getAllForProductGroup(productGroupId) {
     const productAssignments = await ProductAssignment.findAll({
       where: {

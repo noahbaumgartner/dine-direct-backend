@@ -12,18 +12,13 @@ const Modifier = sequelize.define("Modifier", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  price_diff: {
+  priceDiff: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  product_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Product,
-      key: "id",
-      deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
-    },
-  },
 });
+
+Product.hasMany(Modifier);
+Modifier.belongsTo(Product);
 
 module.exports = Modifier;
