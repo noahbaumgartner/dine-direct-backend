@@ -51,6 +51,20 @@ router
         response.status(500).send();
       });
   })
+  .patch("/:id", (request, response) => {
+    const { name, plan } = request.body;
+    SpaceService.updateSingle(request.params.id, name, plan)
+      .then((record) => {
+        response.status(201).json({
+          message: "Record updated successfully",
+          record: record,
+        });
+      })
+      .catch((error) => {
+        console.error("Error occurred: ", error);
+        response.status(500).send();
+      });
+  })
   .delete("/:id", (request, response) => {
     SpaceService.delete(request.params.id)
       .then((record) => {

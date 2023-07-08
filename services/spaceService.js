@@ -27,6 +27,14 @@ class SpaceService {
     return await space.save();
   }
 
+  async updateSingle(id, name, plan) {
+    const space = await this.get(id);
+    if (name) space.name = name;
+    if (plan) space.plan = plan;
+
+    return await space.save();
+  }
+
   async delete(id) {
     const space = await this.get(id);
     return await space.destroy();
