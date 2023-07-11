@@ -1,10 +1,10 @@
 const express = require("express");
-const SpaceService = require("../services/spaceService");
+const PrintJobService = require("../services/printJobService");
 const router = express.Router();
 
 router
   .get("/", (request, response) => {
-    SpaceService.getAll()
+    PrintJobService.getAll()
       .then((records) => {
         response.json(records);
       })
@@ -14,7 +14,7 @@ router
       });
   })
   .get("/:id", (request, response) => {
-    SpaceService.get(request.params.id)
+    PrintJobService.get(request.params.id)
       .then((records) => {
         response.json(records);
       })
@@ -24,8 +24,8 @@ router
       });
   })
   .post("/", (request, response) => {
-    const { name, plan } = request.body;
-    SpaceService.create(name, plan)
+    const { name, PrintTemplateId, PrinterId } = request.body;
+    PrintJobService.create(name, PrintTemplateId, PrinterId)
       .then((record) => {
         response.status(201).json({
           message: "Record created successfully",
@@ -38,22 +38,8 @@ router
       });
   })
   .put("/:id", (request, response) => {
-    const { name, plan } = request.body;
-    SpaceService.update(request.params.id, name, plan)
-      .then((record) => {
-        response.status(201).json({
-          message: "Record updated successfully",
-          record: record,
-        });
-      })
-      .catch((error) => {
-        console.error("Error occurred: ", error);
-        response.status(500).send();
-      });
-  })
-  .patch("/:id", (request, response) => {
-    const { name, plan } = request.body;
-    SpaceService.updateSinglenpm(request.params.id, name, plan)
+    const { name } = request.body;
+    PrintJobService.update(request.params.id, name)
       .then((record) => {
         response.status(201).json({
           message: "Record updated successfully",
@@ -66,7 +52,7 @@ router
       });
   })
   .delete("/:id", (request, response) => {
-    SpaceService.delete(request.params.id)
+    PrintJobService.delete(request.params.id)
       .then((record) => {
         response.status(201).json({
           message: "Record deleted successfully",

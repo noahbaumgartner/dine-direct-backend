@@ -1,8 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
-const ModifierGroup = require("./modifierGroup");
 
-const Modifier = sequelize.define("Modifier", {
+const Printer = sequelize.define("Printer", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -12,13 +11,14 @@ const Modifier = sequelize.define("Modifier", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  priceDiff: {
-    type: DataTypes.FLOAT,
+  usb: {
+    type: DataTypes.BOOLEAN,
     allowNull: false,
+  },
+  ip: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 });
 
-ModifierGroup.hasMany(Modifier);
-Modifier.belongsTo(ModifierGroup);
-
-module.exports = Modifier;
+module.exports = Printer;

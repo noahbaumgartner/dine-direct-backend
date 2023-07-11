@@ -4,12 +4,13 @@ const cors = require("cors");
 
 const productGroupRouter = require("./routes/productGroup");
 const productRouter = require("./routes/product");
-
 const spaceRouter = require("./routes/space");
-const tableRouter = require("./routes/table");
-
 const clientRouter = require("./routes/client");
 const orderRouter = require("./routes/order");
+const printerTemplateRouter = require("./routes/printTemplate");
+const printerJobRouter = require("./routes/printJob");
+const printerRouter = require("./routes/printer");
+const printRouter = require("./routes/print");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -25,9 +26,12 @@ app.use(cors());
 app.use("/productGroups", productGroupRouter);
 app.use("/products", productRouter);
 app.use("/spaces", spaceRouter);
-app.use("/tables", tableRouter);
 app.use("/clients", clientRouter);
 app.use("/orders", orderRouter);
+app.use("/printerTemplates", printerTemplateRouter);
+app.use("/printerJobs", printerJobRouter);
+app.use("/printers", printerRouter);
+app.use("/print", printRouter);
 
 // logger
 app.use(logger);
