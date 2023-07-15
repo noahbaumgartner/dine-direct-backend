@@ -11,6 +11,8 @@ const printerTemplateRouter = require("./routes/printTemplate");
 const printerJobRouter = require("./routes/printJob");
 const printerRouter = require("./routes/printer");
 const printRouter = require("./routes/print");
+const menuRouter = require("./routes/menu");
+const menuGroupsRouter = require("./routes/menuGroup");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -28,10 +30,12 @@ app.use("/products", productRouter);
 app.use("/spaces", spaceRouter);
 app.use("/clients", clientRouter);
 app.use("/orders", orderRouter);
-app.use("/printerTemplates", printerTemplateRouter);
-app.use("/printerJobs", printerJobRouter);
+app.use("/printTemplates", printerTemplateRouter);
+app.use("/printJobs", printerJobRouter);
 app.use("/printers", printerRouter);
 app.use("/print", printRouter);
+app.use("/menus", menuRouter);
+app.use("/menuGroups", menuGroupsRouter);
 
 // logger
 app.use(logger);

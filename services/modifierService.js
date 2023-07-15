@@ -1,10 +1,10 @@
 const Modifier = require("../models/modifier");
 
 class ModifierService {
-  async getAllForProduct(productId) {
+  async getAllForModifierGroup(modifierGroupId) {
     const modifiers = await Modifier.findAll({
       where: {
-        ProductId: productId,
+        ModifierGroupId: modifierGroupId,
       },
     });
 

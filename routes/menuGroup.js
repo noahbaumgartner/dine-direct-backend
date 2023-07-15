@@ -1,10 +1,10 @@
 const express = require("express");
-const SpaceService = require("../services/spaceService");
+const MenuGroupService = require("../services/menuGroupService");
 const router = express.Router();
 
 router
   .get("/", (request, response) => {
-    SpaceService.getAll()
+    MenuGroupService.getAll()
       .then((records) => {
         response.json(records);
       })
@@ -14,7 +14,7 @@ router
       });
   })
   .get("/:id", (request, response) => {
-    SpaceService.get(request.params.id)
+    MenuGroupService.get(request.params.id)
       .then((records) => {
         response.json(records);
       })
@@ -24,8 +24,8 @@ router
       });
   })
   .post("/", (request, response) => {
-    const { name, plan } = request.body;
-    SpaceService.create(name, plan)
+    const { name } = request.body;
+    MenuGroupService.create(name)
       .then((record) => {
         response.status(201).json({
           message: "Record created successfully",
@@ -38,22 +38,8 @@ router
       });
   })
   .put("/:id", (request, response) => {
-    const { name, plan } = request.body;
-    SpaceService.update(request.params.id, name, plan)
-      .then((record) => {
-        response.status(201).json({
-          message: "Record updated successfully",
-          record: record,
-        });
-      })
-      .catch((error) => {
-        console.error("Error occurred: ", error);
-        response.status(500).send();
-      });
-  })
-  .patch("/:id", (request, response) => {
-    const { name, plan } = request.body;
-    SpaceService.updateSingle(request.params.id, name, plan)
+    const { name } = request.body;
+    MenuGroupService.update(request.params.id, name)
       .then((record) => {
         response.status(201).json({
           message: "Record updated successfully",
@@ -66,7 +52,7 @@ router
       });
   })
   .delete("/:id", (request, response) => {
-    SpaceService.delete(request.params.id)
+    MenuGroupService.delete(request.params.id)
       .then((record) => {
         response.status(201).json({
           message: "Record deleted successfully",

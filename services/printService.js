@@ -32,16 +32,21 @@ class PrintService {
     deviceESC.open((error) => {
       printerESC
         .font("a")
-        .align("ct")
         .style("bu")
+        .align("ct")
         .size(1, 1)
-        .text("abcdefghijklmnopqrstufwxyz")
-        .text("abcdefghijklmnopqrstufwxyz")
-        .text("abcdefghijklmnopqrstufwxyz")
-        .text("abcdefghijklmnopqrstufwxyz")
-        .text("abcdefghijklmnopqrstufwxyz")
-        .cut()
-        .close();
+        .text("*********************")
+        .align("lt")
+        .control("HT")
+        .control("HT")
+        .text("This is a test")
+        .newLine()
+        .align("rt")
+        .text("This is a test")
+        .text("*********************")
+        .control("LF");
+      printerESC.cut();
+      printerESC.close();
     });
 
     return print;
