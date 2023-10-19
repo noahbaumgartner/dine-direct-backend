@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const MenuGroup = require("./menuGroup");
+const Product = require("./product");
 
 const MenuGroupItem = sequelize.define("MenuGroupItem", {
   id: {
@@ -16,5 +17,8 @@ const MenuGroupItem = sequelize.define("MenuGroupItem", {
 
 MenuGroup.hasMany(MenuGroupItem);
 MenuGroupItem.belongsTo(MenuGroup);
+
+Product.hasMany(MenuGroupItem);
+MenuGroupItem.belongsTo(Product);
 
 module.exports = MenuGroupItem;

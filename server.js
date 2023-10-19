@@ -14,6 +14,7 @@ const printRouter = require("./routes/print");
 const menuRouter = require("./routes/menu");
 const menuGroupsRouter = require("./routes/menuGroup");
 const databaseRouter = require("./routes/database");
+const modifierGroupRouter = require("./routes/modifierGroup");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -38,6 +39,7 @@ app.use("/print", printRouter);
 app.use("/menus", menuRouter);
 app.use("/menuGroups", menuGroupsRouter);
 app.use("/database", databaseRouter);
+app.use("/modifierGroups", modifierGroupRouter);
 
 // logger
 app.use(logger);
