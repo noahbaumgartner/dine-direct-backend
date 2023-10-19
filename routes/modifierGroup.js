@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const ModifierGroupService = require("../services/modifierGroupService");
+const ModifierService = require("../services/modifierService");
 
 router
     .get("/", (request, response) => {
@@ -64,6 +65,43 @@ router
                 console.error("Error occurred: ", error);
                 response.status(500).send();
             });
-    });
+    })
+    .get("/:id/modifiers", (request, response) => {
+        ModifierService.getAllForModifierGroup(request.params.id)
+            .then((records) => {
+                response.json(records);
+            })
+            .catch((error) => {
+                console.error("Error occurred: ", error);
+                response.status(500).send();
+            });
+    })
+    .post("/:id/modifiers", (request, response) => {
+        const { name, priceDiff } = request.body;
+        ModifierService.create(name, priceDiff, request.params.id)
+            .then((record) => {
+                response.status(201).json({
+                    message: "Record created successfully",
+                    record: record,
+                });
+            })
+            .catch((error) => {
+                console.error("Error occurred: ", error);
+                response.status(500).send();
+            });
+    })
+    .delete("/:id/modifiers/:modifierId", (request, response) => {
+        ModifierService.delete(request.params.modifierId)
+            .then((record) => {
+                response.status(201).json({
+                    message: "Record deleted successfully",
+                    record: record,
+                });
+            })
+            .catch((error) => {
+                console.error("Error occurred: ", error);
+                response.status(500).send();
+            });
+    })
 
 module.exports = router;

@@ -11,11 +11,11 @@ class ModifierService {
     return modifiers;
   }
 
-  async create(name, priceDiff, productId) {
+  async create(name, priceDiff, modifierGroupId) {
     return await Modifier.create({
       name: name,
       priceDiff: priceDiff,
-      ProductId: productId,
+      ModifierGroupId: modifierGroupId,
     });
   }
 
