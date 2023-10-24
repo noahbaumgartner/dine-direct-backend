@@ -11,7 +11,7 @@ class ModifierGroupAssignmentService {
         return modifierGroupAssignments;
     }
 
-    async create(modifierGroupId, productId) {
+    async create(productId, modifierGroupId) {
         return await ModifierGroupAssignment.create({
             ModifierGroupId: modifierGroupId,
             ProductId: productId,

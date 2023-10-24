@@ -1,9 +1,9 @@
 const express = require("express");
-const ModifierService = require("../services/modifierService");
 const router = express.Router();
 
 const ProductService = require("../services/productService");
 const ModifierGroupAssignmentService = require("../services/modifierGroupAssignmentService");
+const ModifierGroupService = require("../services/modifierGroupService");
 
 router
   .get("/", (request, response) => {
@@ -92,9 +92,9 @@ router
       });
   })
   .delete("/:id/modifierGroupAssignments/:modifierGroupId", (request, response) => {
-    ModifierService.delete(request.params.id, request.params.modifierGroupId)
+    ModifierGroupAssignmentService.delete(request.params.modifierGroupId, request.params.id)
       .then((record) => {
-        response.status(201).json({
+        response.status(200).json({
           message: "Record deleted successfully",
           record: record,
         });
